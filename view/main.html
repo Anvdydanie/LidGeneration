@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="js/ajax.js"></script>
+        <meta charset="UTF-8">
+        <title>Поиск тем для лидогенерации</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Анализ конкурентности тем для лидогенерации</h1>
+            <form class="form-style-7" method="post">
+                <h2>Анализ темы по городу</h2>
+                <ul>
+                    <li>
+                        <label for="theme">Тема</label>
+                        <input id="inputTheme" type="text" name="theme" minlength="2" required>
+                        <span>Введите тему для анализа</span>
+                    </li>
+                    <li>
+                        <label for="city">Город</label>
+                        <input id="inputCity" type="text" name="city" list="citiesList" required>
+                        <datalist id="citiesList"></datalist>
+                        <span>Выберите город</span>
+                    </li>
+                    <li>
+                        <label for="strictSearch">Строгая выдача</label>
+                        <input id="isStrictSearch" name="strictSearch" type="checkbox">
+                    </li>
+                    <li>
+                        <input id="buttonAjaxRequest" type="submit" value="Запросить">
+                        <p id="warning"></p>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="results">
+            <div class="triggers">
+                <div id="results-button" onclick="showFullResults()">Показать всю выдачу</div>
+                <div id="results-button" onclick="showFilteredResults()">Показать релевантную выдачу</div>
+            </div>
+            <br>
+            <div class="tables">
+                <table id="yandex-search">
+                    <thead>
+                        <tr>
+                            <td> Яндекс Поиск </td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table id="google-search">
+                    <thead>
+                        <tr>
+                            <td> Google Поиск </td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table id="yandex-advert">
+                    <thead>
+                    <tr>
+                        <td> Яндекс Реклама </td>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table id="vk-groups">
+                    <thead>
+                        <tr>
+                            <td> Группы VKontakte </td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <table id="avito-offers">
+                    <thead>
+                        <tr>
+                            <td> Предложения Авито </td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

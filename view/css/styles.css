@@ -1,0 +1,212 @@
+body{
+    text-align: center;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.container{
+    display: block;
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+#warning {
+    text-align: center;
+    color: #ff878e;
+}
+
+.form-style-7{
+    max-width:400px;
+    margin:20px auto;
+    border-radius:2px;
+    padding:20px;
+}
+.form-style-7 h2{
+    margin: 0 0 20px 0;
+    color: #5C5C5C;
+    font-size: 24px;
+    text-align: center;
+}
+.form-style-7 ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.form-style-7 li{
+    display: block;
+    padding: 9px;
+    border:1px solid #DDDDDD;
+    margin-bottom: 30px;
+    border-radius: 3px;
+}
+.form-style-7 li:last-child{
+    border:none;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.form-style-7 li > label{
+    display: block;
+    float: left;
+    margin-top: -19px;
+    background: #FFFFFF;
+    height: 14px;
+    padding: 2px 5px 2px 5px;
+    color: #B9B9B9;
+    font-size: 14px;
+    overflow: hidden;
+}
+.form-style-7 input[type="text"]{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    display: block;
+    outline: none;
+    border: none;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    padding: 0;
+    text-align: center;
+}
+.form-style-7 input[type="text"]::placeholder {
+    color: #ff98a3;
+    font-size: 14px;
+}
+.form-style-7 li > span{
+    background: #F3F3F3;
+    display: block;
+    padding: 3px;
+    margin: 0 -9px -9px -9px;
+    text-align: center;
+    color: #C0C0C0;
+    font-size: 11px;
+}
+.form-style-7 textarea{
+    resize:none;
+}
+.form-style-7 input[type="submit"],
+.form-style-7 input[type="button"]{
+    background: #2471FF;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-bottom: 3px solid #5994FF;
+    border-radius: 3px;
+    color: #D2E2FF;
+}
+.form-style-7 input[type="submit"]:hover,
+.form-style-7 input[type="button"]:hover{
+    background: #6B9FFF;
+    color:#fff;
+    cursor: pointer;
+}
+
+.tables table {
+    display: inline-block;
+    min-height: 200px;
+    overflow:hidden;
+    border:1px solid #d3d3d3;
+    background:#fefefe;
+    width: 360px;
+    margin:5px;
+    border-radius:5px;
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.tables thead {
+    width: 95%;
+    display: grid;
+    padding:5px 10px 5px;
+}
+.tables thead td {
+    text-shadow: 1px 1px 1px black;
+    text-align:center;
+    font-size: 17px;
+    color: white;
+    width: 100%;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.tables #yandex-search thead td, .tables #yandex-advert thead td {
+    background:#ffdb4d;
+    color: black;
+    text-shadow: 1px 1px 1px #fff;
+}
+.tables #yandex-search thead td:first-letter, .tables #yandex-advert thead td:first-letter {
+    color: red !important;
+}
+.tables #google-search thead td {
+    background:#dd5145;
+}
+.tables #vk-groups thead td {
+    background:#4a76a8;
+}
+.tables #avito-offers thead td {
+    background:#97cf26;
+}
+.tables td {
+    border-top:1px solid #e0e0e0;
+    border-right:1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+    word-break: break-word;
+    width: 100%;
+    background: white;
+}
+.tables td.last {
+    border-right:none;
+}
+.tables tr p {
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+}
+.tables td .title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.tables td .url {
+    text-overflow: ellipsis;
+    width: 170px;
+    white-space: nowrap;
+    overflow:hidden;
+    font-size: 12px;
+}
+.tables td .description {
+    font-size: 14px;
+    font-style: italic;
+}
+.tables .position {
+    width: 20px;
+    display: block;
+}
+.tables #delete-pos {
+    display: table-cell;
+    width: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.triggers #results-button, .triggers #descr-button {
+    border: 1px solid #ff8d8d;
+    background: #ffbbbb;
+    color: white;
+    width: auto;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 10px;
+}
+.triggers #results-button:hover, .triggers #descr-button:hover {
+    background: #ff8989;
+}
