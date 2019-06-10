@@ -107,8 +107,11 @@ h1 {
     cursor: pointer;
 }
 
+.tables {
+    display: block;
+}
 .tables table {
-    display: inline-block;
+    display: inline-grid;
     min-height: 200px;
     overflow:hidden;
     border:1px solid #d3d3d3;
@@ -192,6 +195,9 @@ h1 {
     font-size: 15px;
     cursor: pointer;
 }
+.tables #delete-pos:hover {
+    background: aliceblue;
+}
 
 .triggers #results-button, .triggers #descr-button {
     border: 1px solid #ff8d8d;
@@ -200,7 +206,7 @@ h1 {
     width: auto;
     border-radius: 10px;
     text-align: center;
-    margin: 0 auto;
+    margin: 5px auto;
     cursor: pointer;
     font-size: 16px;
     display: inline-block;
@@ -209,4 +215,18 @@ h1 {
 }
 .triggers #results-button:hover, .triggers #descr-button:hover {
     background: #ff8989;
+}
+
+@media (min-width: 1500px) {
+    .tables {
+        display: flex;
+    }
+    .tables table {
+        display: inline-block;
+    }
+}
+@media (max-width: 780px) {
+    .tables table {
+        width: 98%;
+    }
 }

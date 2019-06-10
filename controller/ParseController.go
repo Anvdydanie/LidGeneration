@@ -20,7 +20,7 @@ type jsonFromFrontend struct {
 func ParseController(w http.ResponseWriter, req *http.Request) {
 	/* фильтр агрегаторов и ненужных сайтов */
 	var filteredUrls = map[string]bool{
-		//"avito.ru": true,
+		"avito.ru":      true,
 		"Яндекс.Карты":  true,
 		"Яндекс.Маркет": true,
 		"yandex.ru":     true,

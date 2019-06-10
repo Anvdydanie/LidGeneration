@@ -41,8 +41,8 @@ const DICTIONARY_KEY = "dict.1.1.20190531T131207Z.f9f5b015b61579b9.9273c50622e75
 const DICTIONARY_LANG = "ru-ru"
 
 // путь к файлам и папкам
-const VIEW_FOLDER_PATH = "./LidGeneration/view"
-const DATABASE_FILE_PATH = "./LidGeneration/database/lidgen.db"
+const VIEW_FOLDER_PATH = "./view"
+const DATABASE_FILE_PATH = "./database/lidgen.db"
 
 // количество страниц, которое необходимо спарсить в выдаче
 const MAX_PAGES_TO_PARSE = 3

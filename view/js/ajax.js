@@ -164,7 +164,7 @@ function showResultInTables(seArr, resultToShow) {
             })
         } else {
             // TODO сообщаем причину ошибки
-            searchEngine.selector.innerHTML += "<tr><td>Не найдено результатов, отвечающих требованиям поиска.</td></tr>"
+            searchEngine.selector.innerHTML = "<tr><td>Не найдено результатов, отвечающих требованиям поиска.</td></tr>"
         }
     });
 }

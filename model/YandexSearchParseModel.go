@@ -78,7 +78,7 @@ func (sType yaSearchParams) yaSearch() (result map[string][]map[string]string, e
 						// полный ответ, содержит все 50 результатов
 						resultFull = append(resultFull, map[string]string{
 							"domain":      domain,
-							"fullUrl":     domain,
+							"fullUrl":     domain, // TODO добавить полный адрес
 							"title":       title,
 							"description": description,
 							"position":    strconv.Itoa(i*10 + j + 1),
