@@ -1,11 +1,10 @@
 package controller
 
-import (
-	"LidGeneration/model"
-)
-
 func CronController() {
-
-	_ = model.ProxyModel()
+	/*
+	   Задаюсь вопросом целесообразности автообновления проксей. Бесплатные прокси долго не живут как показывает практика
+	   и могут сдохнуть за 1 использование.
+	*/
+	//_ = model.ProxyModel()
 
 }

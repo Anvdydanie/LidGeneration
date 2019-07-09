@@ -19,8 +19,6 @@ import (
 5.
 */
 
-// TODO получаем список проверенных proxy каждый час
-
 func main() {
 	// Главная страница
 	http.HandleFunc("/", controller.ViewController)

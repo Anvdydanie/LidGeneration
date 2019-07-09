@@ -35,7 +35,7 @@ func ParseController(w http.ResponseWriter, req *http.Request) {
 		var reqData = new(jsonFromFrontend)
 		err := json.Unmarshal(contents, &reqData)
 		if err == nil {
-			// TODO горутины
+
 			// Парсинг данных по яндекс.xml. Яндекс предоставляет легальный способ парсинга выдачи, но с ограничениями на количество запров в сутки
 			yaSitesList, _ := model.YandexXmlParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch)
 			if yaSitesList == nil {
