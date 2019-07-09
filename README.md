@@ -1,5 +1,5 @@
 # LidGeneration
- The service was created to simplify the analysis of competition in the sphere of services and sales on the Internet in Russian cities
+The service was created to simplify the analysis of competition in the sphere of services and sales on the Internet in Russian cities. Using this service user gets relevant search results from 5 services (yandex, google, vk.com, avito, yandex advert) via 1 button click. It's usefull for people who wants to analyse online market competition.
 
 Project uses 2 third-party packages:
 
