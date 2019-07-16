@@ -6,6 +6,7 @@ import (
 	"errors"
 	"net/url"
 	"strconv"
+	"sync"
 )
 
 type jsonResponseGoogle struct {
@@ -20,7 +21,9 @@ type jsonResponseGoogle struct {
 /*
 Функция легально парсит выдачу Google c помощью api сервиса googleapis.com. Ограничение в 100 запросов в сутки
 */
-func GoogleJsonParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool) (result map[string][]map[string]string, err error) {
+func GoogleJsonParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool, arrCh chan map[string][]map[string]string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	var result map[string][]map[string]string
 	// Результаты полной и фильтрованной выборки
 	var resultFiltered, resultFull []map[string]string
 	// Параметры запроса
@@ -77,5 +80,5 @@ func GoogleJsonParseModel(theme, city string, filteredUrls map[string]bool, stri
 			"fullResponse":     resultFull,
 		}
 	}
-	return result, err
+	arrCh <- result
 }

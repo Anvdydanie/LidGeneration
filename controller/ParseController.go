@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"sync"
 )
 
 type jsonFromFrontend struct {
@@ -30,35 +31,38 @@ func ParseController(w http.ResponseWriter, req *http.Request) {
 	if req.Method == "POST" {
 		contents, _ := ioutil.ReadAll(req.Body)
 		defer req.Body.Close()
-
 		// Разбираем json полученный при ajax запросе на парсинг
 		var reqData = new(jsonFromFrontend)
 		err := json.Unmarshal(contents, &reqData)
 		if err == nil {
-
-			// Парсинг данных по яндекс.xml. Яндекс предоставляет легальный способ парсинга выдачи, но с ограничениями на количество запров в сутки
-			yaSitesList, _ := model.YandexXmlParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch)
-			if yaSitesList == nil {
-				// нелегально парсим данные по яндексу, в случае, если лимит в яндекс.xml исчерпан или сервис недоступен
-				yaSitesList, _ = model.YandexSearchParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch, static.SEARCH_TYPE)
-			}
+			chanCount := 5
+			var yaSearchChan = make(chan map[string][]map[string]string)
+			var yaAdvertChan = make(chan map[string][]map[string]string)
+			var googleChan = make(chan map[string][]map[string]string)
+			var vkChan = make(chan map[string][]map[string]string)
+			var avitoChan = make(chan map[string][]map[string]string)
+			var wg sync.WaitGroup
+			wg.Add(chanCount)
+			// Парсинг поисковой выдачи яндекса
+			go model.YandexXmlParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch, yaSearchChan, &wg)
 			// Парсинг рекламной выдачи яндекса
-			yaAdvList, _ := model.YandexSearchParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch, static.ADVERT_TYPE)
+			go model.YandexSearchParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch, static.ADVERT_TYPE, yaAdvertChan, &wg)
 			// Парсинг данных по googleapis. Легальный способ парсинга выдачи Гугла, но с ограничением в 100 запров в сутки
-			goSitesList, _ := model.GoogleJsonParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch)
+			go model.GoogleJsonParseModel(reqData.Theme, reqData.CityName, filteredUrls, reqData.StrictSearch, googleChan, &wg)
 			// поиск групп в VK
-			vkGroupList, _ := model.VkontakteParseModel(reqData.Theme, reqData.CityName, reqData.StrictSearch)
+			go model.VkontakteParseModel(reqData.Theme, reqData.CityName, reqData.StrictSearch, vkChan, &wg)
 			// поиск объявлений авито
-			avitoList, _ := model.AvitoParseModel(reqData.Theme, reqData.CityName, reqData.StrictSearch)
-
-			// объединяем все полученные результаты в 1 массив
+			go model.AvitoParseModel(reqData.Theme, reqData.CityName, reqData.StrictSearch, avitoChan, &wg)
+			// получаем результат
 			_result := map[string]map[string][]map[string]string{
-				"yandexSearch": yaSitesList,
-				"googleSearch": goSitesList,
-				"yandexAdvert": yaAdvList,
-				"vkGroups":     vkGroupList,
-				"avito":        avitoList,
+				"yandexSearch": <-yaSearchChan,
+				"googleSearch": <-googleChan,
+				"yandexAdvert": <-yaAdvertChan,
+				"vkGroups":     <-vkChan,
+				"avito":        <-avitoChan,
 			}
+			wg.Wait()
+
 			result, err := json.Marshal(_result)
 			if err == nil {
 				w.Write(result)

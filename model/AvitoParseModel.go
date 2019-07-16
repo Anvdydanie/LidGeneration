@@ -5,12 +5,15 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"net/url"
 	"strings"
+	"sync"
 )
 
 /*
 Функция парсит список предложений авито по поисковой фразе
 */
-func AvitoParseModel(theme, city string, strictSearch bool) (result map[string][]map[string]string, err error) {
+func AvitoParseModel(theme, city string, strictSearch bool, arrCh chan map[string][]map[string]string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	var result map[string][]map[string]string
 	var resultFiltered, resultFull []map[string]string
 	// получаем транслит названия города для поиска
 	var cityInTranslit = translitRuToEn(city)
@@ -55,11 +58,12 @@ func AvitoParseModel(theme, city string, strictSearch bool) (result map[string][
 		}
 	}
 	// Совмещаем полную и фильтрованную выдачу
+	// Совмещаем полную и фильтрованную выдачу
 	if len(resultFull) > 0 {
 		result = map[string][]map[string]string{
 			"filteredResponse": resultFiltered,
 			"fullResponse":     resultFull,
 		}
 	}
-	return result, err
+	arrCh <- result
 }

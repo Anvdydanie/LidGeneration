@@ -1,19 +1,38 @@
 body{
     text-align: center;
     font-family: Georgia, "Times New Roman", Times, serif;
+    background-image: url("https://maxgenpromo.com/wp-content/uploads/lidogeneration.png");
+    background-repeat: no-repeat;
+    background-color: #3e3e40;
+    color: #dedede;
 }
 
 .container{
     display: block;
     width: 100%;
     max-width: 850px;
+    padding: 20px;
     margin: 0 auto;
+    background: rgba(92, 92, 92, 0.96);
+    -webkit-box-shadow: 0px 9px 24px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 9px 24px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 9px 24px 2px rgba(0,0,0,0.75);
 }
 
 h1 {
     font-size: 28px;
     text-align: center;
     margin: 30px 0;
+    border-bottom: 2px solid #ee6c5c;
+}
+h1, h2 {
+    color: #badfff;
+}
+
+p, li {
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 #warning {
@@ -41,9 +60,10 @@ h1 {
 .form-style-7 li{
     display: block;
     padding: 9px;
-    border:1px solid #DDDDDD;
+    border:1px solid #ee6c5c;
     margin-bottom: 30px;
     border-radius: 3px;
+    text-align: center;
 }
 .form-style-7 li:last-child{
     border:none;
@@ -54,10 +74,10 @@ h1 {
     display: block;
     float: left;
     margin-top: -19px;
-    background: #FFFFFF;
+    background: #3e3e40;
     height: 14px;
     padding: 2px 5px 2px 5px;
-    color: #B9B9B9;
+    color: #ee6c5c;
     font-size: 14px;
     overflow: hidden;
 }
@@ -80,7 +100,7 @@ h1 {
     font-size: 14px;
 }
 .form-style-7 li > span{
-    background: #F3F3F3;
+    background: #3e3e40;
     display: block;
     padding: 3px;
     margin: 0 -9px -9px -9px;
@@ -93,10 +113,10 @@ h1 {
 }
 .form-style-7 input[type="submit"],
 .form-style-7 input[type="button"]{
-    background: #2471FF;
+    background: #ee6c5c;
     border: none;
     padding: 10px 20px 10px 20px;
-    border-bottom: 3px solid #5994FF;
+    border-bottom: 3px solid #3e3e40;
     border-radius: 3px;
     color: #D2E2FF;
 }
@@ -109,6 +129,7 @@ h1 {
 
 .tables {
     display: block;
+    color: black;
 }
 .tables table {
     display: inline-grid;
@@ -215,6 +236,10 @@ h1 {
 }
 .triggers #results-button:hover, .triggers #descr-button:hover {
     background: #ff8989;
+}
+
+#results {
+    display: none;
 }
 
 @media (min-width: 1500px) {

@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 // Определяем интерфейс YandexSearch для поиска в поисковой и рекламной выдаче яндекса
@@ -21,7 +22,7 @@ func parseSearch(searchType YandexSearch) (result map[string][]map[string]string
 	return result, err
 }
 
-// Создаем структуру под поиск в рекламных объявлениях и поисковой выдаче
+// Создаем структуру под поиск в рекламных объявлениях и поисковой выдачи
 type yaSearchParams struct {
 	Url          string
 	StrictSearch bool
@@ -131,9 +132,11 @@ type citiesStruct struct {
 }
 
 /*
-Функция парсит топ-50 выдачу яндекса, анализирует ее по ключевым словам. Возвращает полный и релевантный ключам результат
+Функция парсит топ-30 выдачу яндекса, анализирует ее по ключевым словам. Возвращает полный и релевантный ключам результат
 */
-func YandexSearchParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool, typeOfSearch string) (result map[string][]map[string]string, err error) {
+func YandexSearchParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool, typeOfSearch string, arrCh chan map[string][]map[string]string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	var result map[string][]map[string]string
 	// Статичные параметры для любых запросов
 	var staticParams = staticSearchParams{
 		city,
@@ -148,14 +151,11 @@ func YandexSearchParseModel(theme, city string, filteredUrls map[string]bool, st
 	} else if typeOfSearch == static.ADVERT_TYPE {
 		// запрос для рекламных объявлений яндекса
 		searchParams = yaSearchParams{static.YANDEX_ADVERT_URL, false, staticParams}
-	} else {
-		err = errors.New("Не распознан typeOfSearch. Необходимо использовать константу ..._TYPE из constants.go. ")
-		return nil, err
 	}
 	// запрашиваем парсинг
-	result, err = parseSearch(searchParams)
+	result, _ = parseSearch(searchParams)
 
-	return result, err
+	arrCh <- result
 }
 
 /*

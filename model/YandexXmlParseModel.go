@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type yandexXmlResponse struct {
@@ -23,7 +24,10 @@ type yandexXmlResponse struct {
 /*
 Функция парсит результаты выдачи яндекса через их XML сервис
 */
-func YandexXmlParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool) (result map[string][]map[string]string, err error) {
+func YandexXmlParseModel(theme, city string, filteredUrls map[string]bool, strictSearch bool, arrCh chan map[string][]map[string]string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	var result map[string][]map[string]string
+	var err error
 	// Результаты полной и фильтрованной выборки
 	var resultFiltered, resultFull []map[string]string
 	// Параметры запроса
@@ -79,5 +83,5 @@ func YandexXmlParseModel(theme, city string, filteredUrls map[string]bool, stric
 			"fullResponse":     resultFull,
 		}
 	}
-	return result, err
+	arrCh <- result
 }

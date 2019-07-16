@@ -79,6 +79,7 @@ function ready() {
             // Отправляем запрос
             let result = sendAjaxRequest(reqString, "/parseSearchEngines");
             if (result.status === 200) {
+                document.getElementById("results").style.display = "block";
                 searchResults = [
                     {
                         response: [result.response.yandexSearch],

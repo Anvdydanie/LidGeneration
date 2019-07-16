@@ -3,12 +3,27 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script src="js/ajax.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <meta charset="UTF-8">
         <title>Поиск тем для лидогенерации</title>
     </head>
     <body>
         <div class="container">
             <h1>Анализ конкурентности тем для лидогенерации</h1>
+            <p><b>Лидогенерация</b> - это передача заявок под процент от выполненных сделок.</p>
+            <p><b>Основная суть</b> - видеть дыры у компаний в сео и маркетинге.</p>
+            <h2>Как работает сервис?</h2>
+            <ul>
+                <li>Необходимо выбрать тему для анализа, например <i>пошив штор</i>.</li>
+                <li>При вводе города сработает автокомплит, который покажет список городов и население каждого.</li>
+                <li>Если выбрать строгую выдачу, то результаты поиска будут содержать только те позиции,
+                    где в Title или Description содержатся все слова темы.
+                    В противном случае будут отображены результаты, где хотя бы одно слово из поля Тема будет в Title или Description.</li>
+                <li>Для анализа выдачи автоматически подбираются синонимы ключей. Окончания слов не важны.</li>
+                <li>Выдача 5 сервисов будет проанализирована и результат вернется в виде 5 таблиц.</li>
+                <li>Можно посмотреть как полную выдачу так и релевантную, нажав соответствующие кнопки.</li>
+                <li>При необходимости можно удалять результаты из таблиц.</li>
+            </ul>
             <form class="form-style-7" method="post">
                 <h2>Анализ темы по городу</h2>
                 <ul>
@@ -24,8 +39,8 @@
                         <span>Выберите город</span>
                     </li>
                     <li>
-                        <label for="strictSearch">Строгая выдача</label>
-                        <input id="isStrictSearch" name="strictSearch" type="checkbox">
+                        <label for="strictSearch">Установить выдачу</label>
+                        <input id="isStrictSearch" name="strictSearch" type="checkbox"> Строгая выдача
                     </li>
                     <li>
                         <input id="buttonAjaxRequest" type="submit" value="Запросить">
@@ -34,7 +49,7 @@
                 </ul>
             </form>
         </div>
-        <div class="results">
+        <div id="results">
             <div class="triggers">
                 <div id="results-button" onclick="showFullResults()">Показать всю выдачу</div>
                 <div id="results-button" onclick="showFilteredResults()">Показать релевантную выдачу</div>

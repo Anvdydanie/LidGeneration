@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 type vkJsonResponse struct {
@@ -23,7 +24,9 @@ type vkJsonResponse struct {
 /*
 Функция парсит через api ВКонтакте список групп по ключевым словам
 */
-func VkontakteParseModel(theme, city string, strictSearch bool) (result map[string][]map[string]string, err error) {
+func VkontakteParseModel(theme, city string, strictSearch bool, arrCh chan map[string][]map[string]string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	var result map[string][]map[string]string
 	var resultFiltered, resultFull []map[string]string
 	var cityId string
 	// получаем id города
@@ -93,5 +96,5 @@ func VkontakteParseModel(theme, city string, strictSearch bool) (result map[stri
 			"fullResponse":     resultFull,
 		}
 	}
-	return result, err
+	arrCh <- result
 }
